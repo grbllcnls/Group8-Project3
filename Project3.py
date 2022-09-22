@@ -9,7 +9,10 @@ def get_information():
     response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
     information_data = {
         "ip": ip_address,
-        "network" : response.get("network")
+        "network" : response.get("network"),
+        "city" : response.get("city"),
+        "version" : response.get("version")
+
         
     }
     return information_data
