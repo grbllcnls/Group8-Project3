@@ -12,8 +12,8 @@ def get_information():
         "network" : response.get("network"),
         "city" : response.get("city"),
         "version" : response.get("version")
-
-        
+	"region" : response.get("region"),
+        "country_name" : response.get("country_name")
     }
     return information_data
 
