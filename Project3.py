@@ -3,7 +3,6 @@ import requests
 
 def get_information():
    
-    response = requests.get().json()
-   
+    response = = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
 
 
