@@ -11,9 +11,11 @@ def get_information():
         "ip": ip_address,
         "network" : response.get("network"),
         "city" : response.get("city"),
-        "version" : response.get("version")
-	"region" : response.get("region"),
-        "country_name" : response.get("country_name")
+        "version" : response.get("version"),
+	    "region" : response.get("region"),
+        "country_name" : response.get("country_name"),
+        "org" : response.get("org"),
+        "postal" : response.get("postal")
     }
     return information_data
 
