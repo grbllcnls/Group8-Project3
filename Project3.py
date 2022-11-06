@@ -1,66 +1,64 @@
+# import library
+from distutils.log import info
 import requests
+import tkinter as tk
+from tkinter import END, Text
+from tkinter.ttk import Button
+# create a main window
+root = tk.Tk()
+root.title('Project 4 - Group 8')
 
+# function that will get the data
+# from the API
 def get_ip():
-    response = requests.get('https://api64.ipify.org/?format=json').json()
-    return response["ip"]
+	# API request
+	r = requests.get('https://api64.ipify.org/?format=json')
+	data = r.json()
+	ip = data['ip']
+
+
+
+	# deletes all the text that is currently
+	# in the TextBox
+	text_box.delete('1.0', END)
+	
+	# inserts new data into the TextBox
+	text_box.insert(END,ip)
+
+
+    
+    
+text_box = Text(root, height=10, width=50)
+get_button = Button(root, text="Get IP", command=get_ip)
+
+text_box.pack()
+get_button.pack()
+
 
 def get_network():
+    ip_address = get_ip()
     response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
     network = {"Network" : response.get("network")}
-    return network
+    print(network)
+    
+    text_box1.delete('1.0', END)
+	
+    text_box1.insert(END, get_network)
 
-def get_city():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    city = {"City" : response.get("city")}
-    return city
 
-def get_version():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    version = {"Version" : response.get("version")}
-    return version
+text_box1 = Text(root, height=10, width=50) 
 
-def get_region():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    region = {"Region" : response.get("region")}
-    return region
 
-def get_countryname():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    countryname = {"Country Name" : response.get("country_name")}
-    return countryname
+get_button1 = Button(root, text="Get Information", command=get_network)
 
-def get_org():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    org = {"Org" : response.get("org")}
-    return org
+get_button1.pack()
 
-def get_postal():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    postal = {"Postal" : response.get("postal")}
-    return postal
 
-def get_information():
-    ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    information_data = {
-        "ip": ip_address,
-        "network" : response.get("network"),
-        "city" : response.get("city"),
-        "version" : response.get("version"),
-	    "region" : response.get("region"),
-        "country_name" : response.get("country_name"),
-        "org" : response.get("org"),
-        "postal" : response.get("postal")
-    }
-    return information_data
 
-print (get_information())
-print (get_postal())
-print (get_org())
-print (get_countryname())
+
+b2 = Button(root, text="Exit", command=root.destroy)
+
+get_button.pack()
+b2.pack()
+
+root.mainloop()
